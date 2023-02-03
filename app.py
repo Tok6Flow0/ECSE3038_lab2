@@ -41,7 +41,7 @@ async def create_todo(request: Request):
   return todo
 
 @app.delete("/todos/{todo_id}")
-async def delete_todo(todo_id: int):
+async def delete_todo_by_id(todo_id: int):
   for index, todo in enumerate(fake_database):
     if todo.get("id") == todo_id:
       del fake_database[index]
