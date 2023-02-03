@@ -47,3 +47,12 @@ async def delete_todo(todo_id: int):
       del fake_database[index]
       return {"message": "Todo deleted"}
   return {"message": "Todo not found"}
+
+@app.patch("/todos/{todo_id}")
+async def update_todo(todo_id: int, request: Request):
+  todo_update = await request.json()
+  for todo in fake_database:
+    if todo.get("id") == todo_id:
+      todo.update(todo_update)
+      return {"message": "Todo updated"}
+  return {"message": "Todo not found"}
