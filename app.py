@@ -39,3 +39,11 @@ async def create_todo(request: Request):
   todo = await request.json()
   fake_database.append(todo)
   return todo
+
+@app.delete("/todos/{todo_id}")
+async def delete_todo(todo_id: int):
+  for index, todo in enumerate(fake_database):
+    if todo.get("id") == todo_id:
+      del fake_database[index]
+      return {"message": "Todo deleted"}
+  return {"message": "Todo not found"}
